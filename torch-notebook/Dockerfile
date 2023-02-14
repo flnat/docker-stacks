@@ -63,13 +63,11 @@ RUN mamba install --quiet --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install Pytorch with Cuda 11.6 enabled
-RUN mamba install --quiet --yes \
+RUN mamba install --quiet --yes -c pytorch -c nvidia \
     'pytorch' \
     'torchvision' \
     'torchaudio' \
-    'pytorch-cuda=11.6' \
-    -c pytorch \
-    -c nvidia && \
+    'pytorch-cuda=11.6' &&\
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
